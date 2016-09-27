@@ -1,0 +1,71 @@
+
+ 
+@mixin breaker_single_line_behind($breaker_line_weight){
+     // * Horizontal Type Line Behind Text
+     // * Inspired by this discussion @ CSS-Tricks: http://css-tricks.com/forums/topic/css-trick-for-a-horizontal-type-line-behind-text/#post-151970
+     // * Available on jsFiddle: http://jsfiddle.net/ericrasch/jAXXA/
+
+    text-align: center;
+    position: relative;
+    z-index: 1;
+    
+    &:before {
+        content:"";
+        // this centers the line to the full width specified 
+        margin: 0 auto; 
+        // positioning must be absolute here, and relative positioning must be applied to the parent 
+        position: absolute; 
+        height: $breaker_line_weight;
+        background: #eee;
+        top: 25%; 
+        left: 0; 
+        right: 0;
+        width: 100%;
+        z-index: -1;
+    }
+
+    span { 
+        /* to hide the lines from behind the text, you have to set the background color the same as the container */ 
+        background: #fff; 
+        padding: 0 10px; 
+    }
+}
+
+@mixin ornamental-rule($size){
+     text-align: center;
+    clear: both;
+
+    hr{
+        border: 0;
+        border-top: $size solid #eee;
+        top: 8px;
+        position: relative;
+        height: $size;
+        border-top: 0;
+        border-style: solid;
+        border-color: #eee;
+        color: #eee;
+        background-color: #eee;
+    }
+    span{
+        background-image: url(http://new.theranchcc.com/wp-content/uploads/2016/06/ornamental-rule.svg);
+        background-size: 14px;
+        background-color: #fff;
+        background-repeat: no-repeat;
+        background-position: center;
+        display: inline-block;
+        width: 30px;
+        height: 38px;
+        top: -20px;
+        position: relative;
+        margin-bottom: -20px;
+    }   
+}
+
+.breaker2 {
+  @include breaker_single_line_behind(4px);
+}
+
+.ornamental-rule {
+    @include ornamental-rule(4px);
+}

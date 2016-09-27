@@ -1,0 +1,32 @@
+{
+  "name": "gavia-strategies-site-design",
+  "description": "Site design for Gavia Strategies",
+  "version": "0.0.1",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "autoprefixer": "^6.3.3",
+    "browser-sync": "^2.11.1",
+    "colors": "^1.1.2",
+    "ftp": "^0.3.10",
+    "html-minify": "^0.3.1",
+    "install": "^0.8.1",
+    "node-sass": "^3.4.2",
+    "npm": "^3.10.5",
+    "onchange": "^2.0.0",
+    "parallelshell": "^2.0.0",
+    "postcss-cli": "^2.5.1"
+  },
+  "scripts": {
+    "scss": "node-sass --include-path node_modules/foundation-sites/scss --source-map true --output-style compact  --output . sass/style.scss",
+    "autoprefixer": "postcss -u autoprefixer -r ./*.css",
+    "build:css": "npm run scss && npm run autoprefixer && node uploadFiles.js && osascript -e 'display notification \"Notification text\" with title \"CSS compiled\"'",
+    "build": "parallelshell 'npm run build:css'",
+    "watch:css": "onchange 'sass/*.scss' 'sass/mixins/*.scss' -- npm run build:css",
+    "watch": "parallelshell 'npm run watch:css' 'npm run watch:js' 'npm run watch:pics'"
+  },
+  "dependencies": {}
+}

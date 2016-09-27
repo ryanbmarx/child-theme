@@ -1,0 +1,111 @@
+@mixin contact_info_icon(){
+    // font-family: "ElegantIcons";
+    font-family: "FontAwesome";
+    background: $accent_color;
+    color: white;
+    border-radius: 3px;
+    margin: 0 11px 0 0;
+    height: 1.3em;
+    width: 1.3em;
+    display: inline-block;
+    text-align: center;
+}
+
+@mixin circle_people_mug($size){
+   overflow: hidden;
+   border: 3px solid $ranch_light_gray;
+   border-radius: 50%;
+   width: $size;
+   // margin: 10px auto;
+}
+
+.et_pb_extended_team_member{
+    @include clearfix();
+    .et_pb_team_member_description h4{
+        font-size:25px;
+        font-family: $body_text_fonts;
+        font-weight: bold;
+    }
+
+    .et_pb_team_member_image {
+        @include circle_people_mug(200px);
+        margin: 0 auto 15px auto;
+    }
+
+    .et_pb_member_contact_info{
+        margin: 0;
+        padding: 0;
+        list-style-type: none;
+        line-height: 1.3em;
+        
+        li{
+            margin-top: 5px;
+        }
+
+        &--email:before{
+            @include contact_info_icon();
+            // content: "\f466";
+            content:"\f0e0";
+        }
+        &--phone:before{
+            @include contact_info_icon();
+            content: "\f095";
+        }
+    }
+
+    .person__bio{
+        margin-top:10px;
+    }
+}
+
+.et_pb_extended_team_member.extended_person--small{
+    // text-align:center;
+
+    .et_pb_team_member_image{
+        @include circle_people_mug(160px);
+    }
+}
+
+.extended_person--mini{
+    // Apply this class to a container when the desired use is just contact deets, like on a contact page.
+    .et_pb_team_member_description h4{
+        font-size:18px;
+    }
+    .person__bio{display:none;}
+    .et_pb_extended_team_member .et_pb_team_member_image{ 
+        width: 60px !important;
+        height:60px !important;
+        float: left;
+        margin-right: 10px;
+    }
+
+}
+// Use this class on a Extended Person parent to hide the bio. 
+.extended--hide-bio{
+    // text-align:center;
+    .person__bio{
+        display:none;
+    }
+}
+
+.extended--hide-photo{
+    .et_pb_team_member_image{
+        display:none;
+    }
+}
+$header_font_size:24px;
+
+@media only screen and (max-width: 980px){
+
+
+    @for $i from 0 through 50{
+        .et_pb_extended_team_member_#{$i}.et_pb_team_member *{
+            font-size: 14px !important;
+            line-height: 1.3em !important;
+        }
+        .et_pb_extended_team_member_#{$i}.et_pb_team_member h4{
+            font-size:#{$header_font_size} !important;
+            line-height: 1.5em !important;
+        }
+    }
+}

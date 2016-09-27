@@ -1,0 +1,116 @@
+/* Theme Name:   XXXX */
+/* Theme URI:    */
+/* Description:  Divi Child Theme */
+/* Author:       XXXXX*/
+/* Author URI:   */
+/* Template:     Divi */
+/* Version:      1.0.0 */
+/* License:      GNU General Public License v2 or later*/
+/* License URI:  http://www.gnu.org/licenses/gpl-2.0.html*/
+/* Tags:         */
+/* Text Domain:  divi-child */
+
+// COLORS
+@import 'colors';
+$accent_color:red;
+
+// OTHER VARIABLES
+
+$body_text_fonts: serif;
+$header_display_fonts: serif;
+
+// Fonts
+
+
+// Mixins
+@import 'mixins';
+
+// Components
+@import 'cf7_as_divi_styles';
+
+
+// Extended people
+@import 'extended_people';
+@import 'breakers';
+
+
+
+/*HIDE THE LOGO ON SCROLL*/
+// .et_header_style_centered header#main-header.et-fixed-header .logo_container { height:0; }
+
+
+
+// Blog page thumbnails are being stretched. 
+// All the images are being stretched. This is the anti-stretching place
+
+.et_post_meta_wrapper{   
+    & > img{
+      width:auto;
+    }
+}
+
+
+// Highlight the join button in the nav
+.et-fixed-header #top-menu a[href="/contact"], .menu-item a[href="/contact"]{
+	color: white !important;
+	background-color: $accent_color;
+	padding: 15px !important;
+	margin-top: 7px;
+	border-radius:5px;
+}
+
+
+
+// Exploded type/page subsubhead.
+.leadin{
+    font-size: 1.3rem;
+    display: block;
+    line-height: 1.5em;
+    margin-bottom: 40px;
+    padding-bottom: 30px;
+    border-bottom: 3px solid #eee;
+}
+
+
+
+// Center social media icons
+.et_pb_social_media_follow{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	flex-wrap:wrap;
+
+	li{
+		float:none;
+		margin-bottom:0;
+	}
+}
+
+
+// Changes to the Events (not time.ly all-in-1 calendar) calendar
+
+.et_pb_widget{
+	float:none;
+}
+
+#footer-widgets .footer-widget .tribe-list-widget {
+	li{
+		margin-bottom:10px;
+		padding-left:0;
+		&:before {
+			content: none;
+		}
+
+		.tribe-event-title{
+			font-family: $body_text_fonts;
+			font-weight:bold;
+			padding-bottom:0;
+		}
+	}
+}
+
+
+@media all and (max-width:768px){
+
+}
+
