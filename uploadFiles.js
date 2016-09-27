@@ -26,7 +26,7 @@
 
 
 // By default, we want to upload these files
-var filesToUpload = ['style.css', 'style.css.map']
+var filesToUpload = []
 
 process.argv.forEach((v, i) => {
 	// Cycle through the arguments passed arguments and add them to the list if they are, in fact, files
@@ -40,7 +40,7 @@ process.argv.forEach((v, i) => {
 	}
 });
 
-var remotePath = "./public_html/wp-content/themes/MSDivi";
+var remotePath = "XXX";
 
 var c = new Client();
 

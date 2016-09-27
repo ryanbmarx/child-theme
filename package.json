@@ -23,10 +23,13 @@
   "scripts": {
     "scss": "node-sass --include-path node_modules/foundation-sites/scss --source-map true --output-style compact  --output . sass/style.scss",
     "autoprefixer": "postcss -u autoprefixer -r ./*.css",
-    "build:css": "npm run scss && npm run autoprefixer && node uploadFiles.js && osascript -e 'display notification \"Notification text\" with title \"CSS compiled\"'",
+    "build:css": "npm run scss && npm run autoprefixer && npm run upload:css && osascript -e 'display notification \"Notification text\" with title \"CSS compiled\"'",
     "build": "parallelshell 'npm run build:css'",
+    "upload:css" : "node uploadFiles.js style.css style.css.map",
+    "upload:functions": "node uploadFiles.js functions.php",
+    "watch:functions": "onchange 'functions.php' -- npm run upload:functions",
     "watch:css": "onchange 'sass/*.scss' 'sass/mixins/*.scss' -- npm run build:css",
-    "watch": "parallelshell 'npm run watch:css' 'npm run watch:js' 'npm run watch:pics'"
+    "watch": "parallelshell 'npm run watch:css' 'npm run watch:js' 'npm run watch:functions'"
   },
   "dependencies": {}
 }
