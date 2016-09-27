@@ -19,32 +19,22 @@ add_filter('upload_mimes', 'cc_mime_types');
 
 
 /*-----------------------------------------------------------------------------------*/
-/*  THE HOMEPAGE CTA/"CLICKER"
+/*  Extending selected divi modules
 /*-----------------------------------------------------------------------------------*/
 
 // TO DO: Make this a single function call
 
 function DS_Custom_Modules(){
  if(class_exists("ET_Builder_Module")){
-	include("extended_person_module.php");
+ 	// This adds options for more contact types and, with some clever css, a more flexible usage.
+	include("ehanhanced_divi_modules/extended_person_module.php");
+
+	// This creates a hybrid blurb/cta. CTA's should have the option for images and more than one button. Sheesh!
+	include("ehanhanced_divi_modules/extended_cta.php");
  }
 }
 
 
-
-// $custom_modules = array(
-// 	"homepage_picture_clicker.php",
-// 	"extended_person_module.php"
-// );
-
-// function DS_Custom_Modules(){
-// 	foreach ($custom_modules as &$module) {
-// 		if(class_exists("ET_Builder_Module")){
-// 			include($module);
-// 		}
-// 	}
-// 	unset($module); // break the reference with the last element
-// }
 
 function Prep_DS_Custom_Modules(){
  global $pagenow;
@@ -65,7 +55,11 @@ if ( ! $is_admin || ( $is_admin && in_array( $pagenow, $required_admin_pages ) &
 Prep_DS_Custom_Modules();
 
 
-// adding shortcodes 
+//#############################
+// Add a breaker. With or without text. This requires designing, obviously.
+//#############################
+
+
 // [breaker label="XXX NEED A LABEL XXX" tag="h2>"]
 
 function breaker_function($atts){
@@ -85,12 +79,17 @@ function breaker_function($atts){
 
 add_shortcode('breaker','breaker_function');
 
+
+//#############################
+// Add dummy type where needed. It will show up red, which is an alarm color.
+//#############################
+
 function lorem_function($atts){
 	extract(shortcode_atts(array(
 		'num' => 4
 		),$atts));
-	$retval = "<p style='color:red;background:rgba(255,0,0,.25);'><strong>Dummy type needs replacing: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execcaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est labor.</p>";
-	$lorem = "<p style='color:red;background:rgba(255,0,0,.25);'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execcaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laboru</p>";
+	$retval = "<p style='color:red;border:1px solid red'><strong>Dummy type needs replacing: </strong>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execcaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est labor.</p>";
+	$lorem = "<p style='color:red;border:1px solid red'>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud execcaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laboru</p>";
 	
 	for ($i = 0; $i < intval($atts['num']) - 1; $i++) {
     	$retval = $retval . $lorem;
@@ -98,7 +97,6 @@ function lorem_function($atts){
 
 	return $retval;
 }
-
 add_shortcode('lorem','lorem_function');
 
 
